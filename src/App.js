@@ -1,41 +1,16 @@
-import '..'
-function App() {
-  const categories = [
-    {
-      id: 1,
-      title: "Hats",
-    },
-    {
-      id: 2,
-      title: "Jackets",
-    },
-    {
-      id: 3,
-      title: "Sneakers",
-    },
-    {
-      id: 4,
-      title: "Womens",
-    },
-    {
-      id: 5,
-      title: "Mens",
-    },
-  ];
-
-  return (
-    <div className="categories-container">
-      {categories.map(({ id, title }) => (
-        <div key={id} className="category-container">
-          {/* <img/> */}
-          <div className="category-body-container">
-            <h2>{title}</h2>
-            <p>Shop Now</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+import { Route,Routes } from 'react-router-dom';
+import './componts/component-category/component-stayle/categories.styles.scss';
+import Home from './routes/home/home.component';
+import Shop from './componts/component-category/container-category/shop.component';
+import Navbar from '../src/componts/component-category/container-category/naviton.componet';
+const  App=()=> {
+return(
+  <Routes>
+    <Route path='/' element={<Navbar/>}>
+    <Route index element={<Home/>}/>
+    <Route path='shop' element={<Shop/>}/>
+     </Route>
+  </Routes>
+)
 }
-
 export default App;
