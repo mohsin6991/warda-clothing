@@ -1,38 +1,16 @@
+import { Route,Routes } from 'react-router-dom';
 import './componts/component-category/component-stayle/categories.styles.scss';
-
-import Dirct from'./componts/Dirctory/dirctory.component'
-function App() {
-  const categories = [
-    {
-      id: 1,
-      title: "hats",
-      imageUrl: "https://i.ibb.co/cvpntL1/hats.png"
-    },
-    {
-      id: 2,
-      title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png"
-    },
-    {
-      id: 3,
-      title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png"
-    },
-    {
-      id: 4,
-      title: "womens",
-      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png"
-    },
-    {
-      id: 5,
-      title: "mens",
-      imageUrl:"https://i.ibb.co/R70vBrQ/men.png"
-    }
-  ];
-
-  return <Dirct categories={categories} />;
-    
-  
+import Home from './routes/home/home.component';
+import Shop from './componts/component-category/container-category/shop.component';
+import Navbar from '../src/componts/component-category/container-category/naviton.componet';
+const  App=()=> {
+return(
+  <Routes>
+    <Route path='/' element={<Navbar/>}>
+    <Route index element={<Home/>}/>
+    <Route path='shop' element={<Shop/>}/>
+     </Route>
+  </Routes>
+)
 }
-
 export default App;
