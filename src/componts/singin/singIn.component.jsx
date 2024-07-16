@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import {
     signInWithEmailAndPassword ,
-    createUserDocumentFromAuth,
+    
     signInWithGooglePopup,
-
 } from "../../utilts/firebase/firebase-utlits";
 
 import Button from "../button/button.compnent";
 
 import FormInput from '../singup-component/form';
+
 import '../singin/singin.style.scss'
 const Sin=()=>{
     const defaultFormFields = {   
@@ -17,14 +17,12 @@ const Sin=()=>{
     };
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+    
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
     };
     const SinginwhitGoogle =async()=>{
-        const {user} = await signInWithGooglePopup();
-        //console.log(result);
-        createUserDocumentFromAuth(user)
-        
+        await signInWithGooglePopup();        
 };
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -33,8 +31,7 @@ const Sin=()=>{
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const respose = await signInWithEmailAndPassword(email, password);
-            console.log(respose);
+            await signInWithEmailAndPassword(email, password);
             resetFormFields();
         } catch (error) {
                 switch(error.code){

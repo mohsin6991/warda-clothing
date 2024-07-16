@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState , useContext } from "react";
 import {createAuthUserWithEmailAndPassword ,createUserDocumentFromAuth} from "../../utilts/firebase/firebase-utlits";
 import FormInput from "../singup-component/form";
 import Button from "../button/button.compnent"
 import './form-input.styles.scss'
 
-
+import { UserContext } from '../../context/user.contexts';
 const SignupForm = () => {
     const defaultFormFields = {
         displayName: '',
@@ -15,10 +15,12 @@ const SignupForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
-
+    console.log('rerender singup Page');
+    const { setCurrentUser }=useContext(UserContext);
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
     };
+    
            
 
     const handleChange = (event) => {
@@ -33,11 +35,13 @@ const SignupForm = () => {
             alert("Passwords do not match");
             return;
         }
+        
 
         try {
-            const userCredential = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserDocumentFromAuth(userCredential.user, { displayName });
-            resetFormFields();
+            const {user} = await createAuthUserWithEmailAndPassword(email, password);
+            setCurrentUser(user);
+            await createUserDocumentFromAuth(user, { displayName });
+            resetFormFields();        
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('Cannot create user, email already in use');
