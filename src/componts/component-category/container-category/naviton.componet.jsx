@@ -4,6 +4,9 @@ import { ReactComponent as CrwnLogo } from "../../../assets/crown.svg";
 import { UserContext } from "../../../context/user.contexts";
 import "../component-stayle/navigation.styles.scss";
 import { SignOut } from "../../../utilts/firebase/firebase-utlits";
+import  CartIcon  from '../cart-icon/cart.componet';
+import CartDropdown from "../../cart-dropdown/cardDropdown.component";
+import { CartContext } from "../../../context/cart.context";
 const Navbar=()=>{
     const { currentUser, setCurrentUser } = useContext(UserContext);
 
@@ -13,6 +16,7 @@ const Navbar=()=>{
         setCurrentUser(null);  // Update currentUser state to null after sign-out
       
     };
+    const { isCartOpen } = useContext(CartContext);
     return (
     <Fragment>
         <div className="navigation">
@@ -28,10 +32,11 @@ const Navbar=()=>{
                     <Link className="nav-link" to='/auth'>Sing In</Link>
                 )
             }
-          </div>
+            <CartIcon />
+            {isCartOpen && <CartDropdown />}
+          </div>    
         </div>
         <Outlet/>
-
     </Fragment>
     );
 

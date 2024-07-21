@@ -4,6 +4,7 @@ import Home from './routes/home/home.component';
 import Shop from './componts/component-category/container-category/shop.component';
 import Navbar from '../src/componts/component-category/container-category/naviton.componet';
 import Authentication from './componts/authentication/authenticaion.component';
+import CheckOut from './componts/checkout/checkout.component';
 const App=()=>{
 return(
   <Routes>
@@ -11,6 +12,8 @@ return(
     <Route index element={<Home/>}/>
     <Route path='shop' element={<Shop/>}/>
     <Route path='auth' element={<Authentication />}/>
+    <Route path='checkout' element={<CheckOut />}/>
+    
     </Route>
   </Routes>
 );
